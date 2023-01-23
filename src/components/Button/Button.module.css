@@ -1,0 +1,12 @@
+.primary {
+  @apply bg-sky-500 text-white border-sky-500 disabled:bg-sky-200 border-inherit enabled:active:bg-sky-600;
+}
+
+.secondary {
+  @apply bg-orange-400 text-white border-orange-400 disabled:bg-orange-200 border-inherit enabled:active:bg-orange-500;
+}
+
+.success {
+  @apply bg-green-500 text-white border-green-500 disabled:bg-green-200 border-inherit enabled:active:bg-green-600;
+}
+
