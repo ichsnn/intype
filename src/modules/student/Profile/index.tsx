@@ -45,20 +45,20 @@ export default function StudentProfile() {
           <p>Cek statistik kamu berdasarkan jenis tes</p>
         </div>
 
-        <div className='flex flex-col gap-9'>
-          <div className='flex-1'>
+        <div className="flex flex-col gap-9">
+          <div className="flex-1">
             <h3 className="font-semibold text-xl text-sky-500 mb-4">
               Test Menyusun Grammar
             </h3>
-            <div className='h-72'>
+            <div className="h-72">
               <ComposeGrammarStats />
             </div>
           </div>
-          <div className='flex-1'>
+          <div className="flex-1">
             <h3 className="font-semibold text-xl text-orange-500 mb-4">
               Test Mendengar & Mengetik
             </h3>
-            <div className='h-72'>
+            <div className="h-72">
               <ListenTypingStats />
             </div>
           </div>
