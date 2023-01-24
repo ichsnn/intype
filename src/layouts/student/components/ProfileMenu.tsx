@@ -83,7 +83,7 @@ export function ProfileMenuItem({
   onClick,
 }: Route & { onClick: () => void }) {
   return (
-    <li className="text-slate-900 font-medium hover:bg-sky-100 active:bg-sky-100">
+    <li className="text-slate-900 font-semibold hover:bg-sky-100 active:bg-sky-100">
       <Link to={path} className="w-full block px-4 py-2" onClick={onClick}>
         {name}
       </Link>

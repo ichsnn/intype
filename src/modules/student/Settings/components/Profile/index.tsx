@@ -68,6 +68,7 @@ const StudentSettingsProfile = () => {
               label="Profile"
               id="profile"
               {...register('profile')}
+              accept='image/*'
             />
           </div>
           <div className={style.form_group}>

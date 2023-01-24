@@ -7,6 +7,7 @@ import StudentLayout from '@/layouts/student';
 import StudentProfile from '@/modules/student/Profile';
 import StudentSettings from '@/modules/student/Settings';
 import StudentSettingsLayout from '@/layouts/student/Settings';
+import StudentLogout from '@/modules/student/Logout';
 
 const adminRoutes = [route.LOGIN_ADMIN, route.DASHBOARD_ADMIN];
 const studentRoutes = [
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
   {
     path: '/student/login',
     element: <StudentLogin />,
+  },
+  {
+    path: '/student/logout',
+    element: <StudentLogout />,
   },
   {
     path: 'student',
