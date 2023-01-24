@@ -41,7 +41,6 @@ export default function ListenTypingStats() {
           stroke="#EA580C"
           fillOpacity={1}
           fill="url(#listenTypingStatsColor)"
-          isAnimationActive={false}
         />
         <XAxis dataKey={'name'} />
         <YAxis dataKey={'Score'} mirror />

@@ -4,7 +4,7 @@ import { Route } from '@/models/Route';
 
 export function Menu({ routes }: { routes: Route[] }) {
   return (
-    <ul className="flex">
+    <ul className="flex gap-1">
       {routes.map((route) => (
         <MenuItem key={route.path} {...route} />
       ))}
@@ -18,9 +18,9 @@ export function MenuItem({ path, name }: Route) {
     <li>
       <Link
         className={cn(
-          'font-semibold text-base text-slate-900 px-5 py-2 rounded-full',
+          'font-semibold text-base text-slate-900 px-5 py-2 rounded-full block hover:bg-sky-100',
           {
-            'bg-sky-200': match,
+            'bg-sky-100': match,
           }
         )}
         to={path}

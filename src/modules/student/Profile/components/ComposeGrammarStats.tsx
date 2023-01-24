@@ -35,7 +35,6 @@ export default function ComposeGrammarStats() {
           stroke="#0284C7"
           fillOpacity={1}
           fill="url(#composeGrammarStatsColor)"
-          isAnimationActive={false}
         />
         <XAxis dataKey={'name'} />
         <YAxis dataKey={'Score'} mirror/>

@@ -30,12 +30,17 @@ export const LEADERBOARD = {
 
 export const PROFILE = {
   name: 'Profil',
-  path: '/student/profile/:username',
+  path: '/student/profile',
 };
 
-export const SETTINGS = {
+export const SETTINGS_PROFILE_STUDENT = {
   name: 'Pengaturan',
-  path: '/settings/:type',
+  path: '/student/settings/profile',
+};
+
+export const SETTINGS_PASSWORD_STUDENT = {
+  name: 'Pengaturan',
+  path: '/student/settings/profile',
 };
 
 export const LOGIN_ADMIN = {

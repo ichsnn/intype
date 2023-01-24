@@ -2,8 +2,11 @@ import { PencilIcon } from '@heroicons/react/24/solid';
 import Button from '@/components/Button';
 import ComposeGrammarStats from './components/ComposeGrammarStats';
 import ListenTypingStats from './components/ListenTypingStats';
+import { useNavigate } from 'react-router-dom';
+import { SETTINGS_PROFILE_STUDENT } from '@/constants';
 
 export default function StudentProfile() {
+  const navigate = useNavigate();
   return (
     <div className="max-w-7xl mx-auto space-y-10 divide-y text-slate-900">
       <section id="profile" className="flex justify-between">
@@ -31,6 +34,7 @@ export default function StudentProfile() {
             label="Ubah Profile"
             primary
             iconLeft={<PencilIcon className="w-6" />}
+            onClick={() => navigate(SETTINGS_PROFILE_STUDENT.path)}
           />
         </div>
       </section>

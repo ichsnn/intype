@@ -5,7 +5,7 @@ import {
   HOME,
   LEADERBOARD,
   PROFILE,
-  SETTINGS,
+  SETTINGS_PROFILE_STUDENT,
   STUDENT_LOGOUT,
   TEST,
 } from '@/constants';
@@ -13,7 +13,7 @@ import { ProfileMenu } from './ProfileMenu';
 import { Menu } from './Menu';
 
 const UserNavigationRoutes: Route[] = [TEST, LEADERBOARD, ABOUT];
-const ProfileNavigationRoutes: Route[] = [PROFILE, SETTINGS, STUDENT_LOGOUT];
+const ProfileNavigationRoutes: Route[] = [{...PROFILE, path: `${PROFILE.path}/username`}, SETTINGS_PROFILE_STUDENT, STUDENT_LOGOUT];
 
 export default function Navigation() {
   return (

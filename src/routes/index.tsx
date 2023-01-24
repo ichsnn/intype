@@ -5,13 +5,15 @@ import StudentLogin from '@/modules/student/Login';
 import StudentTest from '@/modules/student/Test';
 import StudentLayout from '@/layouts/student';
 import StudentProfile from '@/modules/student/Profile';
+import StudentSettings from '@/modules/student/Settings';
+import StudentSettingsLayout from '@/layouts/student/Settings';
 
 const adminRoutes = [route.LOGIN_ADMIN, route.DASHBOARD_ADMIN];
 const studentRoutes = [
   route.TEST,
   route.LOGIN_STUDENT,
   route.REGISTER_STUDENT,
-  route.SETTINGS,
+  route.SETTINGS_PROFILE_STUDENT,
   route.PROFILE,
 ];
 
@@ -40,6 +42,20 @@ export const router = createBrowserRouter([
       {
         path: 'profile/:username',
         element: <StudentProfile />,
+      },
+      {
+        path: 'settings',
+        element: <StudentSettingsLayout />,
+        children: [
+          {
+            path: ':type',
+            element: <StudentSettings />,
+          },
+          {
+            path: '*',
+            element: <StudentSettings />,
+          },
+        ],
       },
     ],
   },

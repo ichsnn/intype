@@ -1,6 +1,5 @@
 import style from './Button.module.css';
 import cn from 'classnames/bind';
-import propTypes from 'prop-types';
 import { ButtonProps } from './types';
 
 export default function Button({primary, secondary, success, iconLeft, iconRight, ...props}: ButtonProps) {
@@ -8,7 +7,7 @@ export default function Button({primary, secondary, success, iconLeft, iconRight
   return (
     <button
       {...props}
-      className={cx('w-full py-3 px-6 rounded-full font-bold border flex items-center gap-2 whitespace-nowrap shadow-md', {
+      className={cx('w-full py-3 px-6 rounded-full font-bold border flex items-center justify-center gap-2 whitespace-nowrap shadow-md', {
         primary: primary,
         secondary: secondary,
         success: success,

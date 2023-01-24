@@ -1,0 +1,3 @@
+.form_group {
+  @apply grid grid-cols-[240px,auto];
+}
