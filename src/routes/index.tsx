@@ -3,11 +3,13 @@ import { UserRole } from '@/models/User';
 import * as route from '@/constants';
 import StudentLogin from '@/modules/student/Login';
 import StudentTest from '@/modules/student/Test';
-import StudentLayout from '@/layouts/student';
+import StudentLayout from '@/layouts/student/Main';
 import StudentProfile from '@/modules/student/Profile';
 import StudentSettings from '@/modules/student/Settings';
 import StudentSettingsLayout from '@/layouts/student/Settings';
 import StudentLogout from '@/modules/student/Logout';
+import StudentRegister from '@/modules/student/Register';
+import StudentAuthLayout from '@/layouts/student/Auth';
 
 const adminRoutes = [route.LOGIN_ADMIN, route.DASHBOARD_ADMIN];
 const studentRoutes = [
@@ -29,12 +31,34 @@ export function getRoutes(role: UserRole) {
 
 export const router = createBrowserRouter([
   {
+    path: 'student',
+    element: <StudentAuthLayout />,
+    children: [
+      {
+        path: 'login',
+        element: <StudentLogin />,
+      },
+      {
+        path: 'logout',
+        element: <StudentLogout />,
+      },
+      {
+        path: 'register',
+        element: <StudentRegister />,
+      },
+    ],
+  },
+  {
     path: '/student/login',
     element: <StudentLogin />,
   },
   {
     path: '/student/logout',
     element: <StudentLogout />,
+  },
+  {
+    path: '/student/register',
+    element: <StudentRegister />,
   },
   {
     path: 'student',
