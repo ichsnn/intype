@@ -1,2 +1,3 @@
 import PublicHome from './Home';
-export { PublicHome };
+import Error404 from './Error404';
+export { PublicHome, Error404 };

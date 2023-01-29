@@ -1,7 +1,12 @@
-import { createBrowserRouter } from 'react-router-dom';
-import { StudentAuthLayout, StudentLayout } from '@/modules/layouts';
+import { Navigate, Route, createBrowserRouter } from 'react-router-dom';
+import {
+  StudentAuthLayout,
+  StudentLayout,
+  StudentSettingsLayout,
+} from '@/modules/layouts';
 
 import {
+  Error404,
   StudentLogin,
   StudentLogout,
   StudentProfile,
@@ -10,62 +15,27 @@ import {
   StudentTest,
 } from '@/modules/views';
 
-import StudentSettingsLayout from '@/modules/layouts/student/Settings';
-
 export const router = createBrowserRouter([
   {
     path: 'student',
-    element: <StudentAuthLayout />,
     children: [
       {
-        path: 'login',
-        element: <StudentLogin />,
-      },
-      {
-        path: 'logout',
-        element: <StudentLogout />,
-      },
-      {
-        path: 'register',
-        element: <StudentRegister />,
-      },
-    ],
-  },
-  {
-    path: '/student/login',
-    element: <StudentLogin />,
-  },
-  {
-    path: '/student/logout',
-    element: <StudentLogout />,
-  },
-  {
-    path: '/student/register',
-    element: <StudentRegister />,
-  },
-  {
-    path: 'student',
-    element: <StudentLayout />,
-    children: [
-      {
-        path: 'test',
-        element: <StudentTest />,
-      },
-      {
-        path: 'profile/:username',
-        element: <StudentProfile />,
-      },
-      {
-        path: 'settings',
-        element: <StudentSettingsLayout />,
+        element: <StudentAuthLayout />,
         children: [
+          { path: 'login', element: <StudentLogin /> },
+          { path: 'register', element: <StudentRegister /> },
+          { path: 'logout', element: <StudentLogout /> },
+        ],
+      },
+      {
+        element: <StudentLayout />,
+        children: [
+          { path: 'test', element: <StudentTest /> },
+          { path: 'profile/:username', element: <StudentProfile /> },
           {
-            path: ':type',
-            element: <StudentSettings />,
-          },
-          {
-            path: '*',
-            element: <StudentSettings />,
+            path: 'settings',
+            element: <StudentSettingsLayout />,
+            children: [{ path: ':type', element: <StudentSettings /> }],
           },
         ],
       },

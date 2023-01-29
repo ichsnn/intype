@@ -1,8 +1,9 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useRoutes } from 'react-router-dom';
 import Container from './components/Container';
 import Sidebar from './components/Sidebar';
+import { withoutAuth } from '@/hoc/auth';
 
-export default function StudentAuthLayout() {
+const StudentAuthLayout = () => {
   return (
     <Container>
       <Sidebar />
@@ -14,4 +15,6 @@ export default function StudentAuthLayout() {
       </main>
     </Container>
   );
-}
+};
+
+export default StudentAuthLayout;

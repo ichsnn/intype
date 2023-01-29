@@ -4,6 +4,7 @@ import StudentSettingsPassword from './components/Password';
 
 const StudentSettings = () => {
   const { type } = useParams();
+  console.log(type)
   if (type === 'profile') {
     return <StudentSettingsProfile />;
   }
