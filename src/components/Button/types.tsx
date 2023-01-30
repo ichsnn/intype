@@ -10,6 +10,8 @@ export interface ButtonProps
   secondary?: boolean;
   tertiary?: boolean;
   success?: boolean;
+  whitePrimary?: boolean;
+  whiteSecondary?: boolean;
   color?: string;
   iconLeft?: JSX.Element;
   iconRight?: JSX.Element;

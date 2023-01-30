@@ -10,3 +10,10 @@
   @apply bg-green-500 text-white border-green-500 disabled:bg-green-200 border-inherit enabled:active:bg-green-600;
 }
 
+.whitePrimary {
+  @apply bg-white text-sky-500 border-sky-500 disabled:bg-gray-200 border-inherit enabled:active:bg-transparent active:text-white transition-colors;
+}
+
+.whiteSecondary {
+  @apply bg-white text-orange-400 border-orange-400 disabled:bg-gray-200 border-inherit enabled:active:bg-transparent active:text-white transition-colors;
+}
