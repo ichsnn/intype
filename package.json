@@ -16,7 +16,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.1",
+    "react-hotkeys-hook": "^4.3.4",
     "react-router-dom": "^6.7.0",
+    "react-tooltip": "^5.7.3",
     "recharts": "^2.3.2"
   },
   "devDependencies": {
