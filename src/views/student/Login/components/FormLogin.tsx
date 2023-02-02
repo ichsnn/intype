@@ -3,7 +3,7 @@ import { Form, FormInput, FormInputWrapper } from '@/components/Form';
 import { FieldValues, useForm } from 'react-hook-form';
 import ForgotPassword from './ForgotPassword';
 import { useAuth } from '@/contexts/auth';
-import { UserData } from '@/test';
+import { UserData } from '@/tests';
 
 export default function FormLogin() {
   const {

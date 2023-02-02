@@ -3,42 +3,44 @@ import {
   StudentAuthLayout,
   StudentLayout,
   StudentSettingsLayout,
-} from '@/modules/layouts';
+} from '@/layouts';
 
 import {
   Error404,
+  PublicHome,
+  StudentComposeGrammar,
   StudentLogin,
   StudentLogout,
   StudentProfile,
   StudentRegister,
   StudentSettings,
   StudentTest,
-} from '@/modules/views';
+} from '@/views';
 
 export const router = createBrowserRouter([
   {
-    path: 'student',
+    path: '/',
+    element: <PublicHome />,
+  },
+  {
+    element: <StudentAuthLayout />,
     children: [
+      { path: 'student/login', element: <StudentLogin /> },
+      { path: 'student/register', element: <StudentRegister /> },
+      { path: 'student/logout', element: <StudentLogout /> },
+    ],
+  },
+  {
+    element: <StudentLayout />,
+    children: [
+      { path: 'student/test', element: <StudentTest /> },
+      { path: 'student/profile/:username', element: <StudentProfile /> },
       {
-        element: <StudentAuthLayout />,
-        children: [
-          { path: 'login', element: <StudentLogin /> },
-          { path: 'register', element: <StudentRegister /> },
-          { path: 'logout', element: <StudentLogout /> },
-        ],
-      },
-      {
-        element: <StudentLayout />,
-        children: [
-          { path: 'test', element: <StudentTest /> },
-          { path: 'profile/:username', element: <StudentProfile /> },
-          {
-            path: 'settings',
-            element: <StudentSettingsLayout />,
-            children: [{ path: ':type', element: <StudentSettings /> }],
-          },
-        ],
+        path: 'student/settings',
+        element: <StudentSettingsLayout />,
+        children: [{ path: ':type', element: <StudentSettings /> }],
       },
     ],
   },
+  { path: '/student/test/composegrammar', element: <StudentComposeGrammar /> },
 ]);

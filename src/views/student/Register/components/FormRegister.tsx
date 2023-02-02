@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import { Form, FormInput, FormInputWrapper } from '@/components/Form';
 import { FieldValues, useForm } from 'react-hook-form';
 import { useAuth } from '@/contexts/auth';
-import { UserData } from '@/test';
+import { UserData } from '@/tests';
 
 export default function FormRegister() {
   const {

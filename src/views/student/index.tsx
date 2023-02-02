@@ -4,6 +4,7 @@ import StudentRegister from './Register';
 import StudentTest from './Test';
 import StudentProfile from './Profile';
 import StudentSettings from './Settings';
+import StudentComposeGrammar from './ComposeGrammar';
 
 export {
   StudentLogin,
@@ -12,4 +13,5 @@ export {
   StudentTest,
   StudentProfile,
   StudentSettings,
+  StudentComposeGrammar,
 };
