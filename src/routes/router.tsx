@@ -1,4 +1,4 @@
-import { Navigate, Route, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import {
   StudentAuthLayout,
   StudentLayout,
@@ -8,13 +8,14 @@ import {
 import {
   Error404,
   PublicHome,
-  StudentComposeGrammar,
   StudentLogin,
   StudentLogout,
   StudentProfile,
   StudentRegister,
   StudentSettings,
   StudentTest,
+  StudentComposeGrammar,
+  StudentListenTyping,
 } from '@/views';
 
 export const router = createBrowserRouter([
@@ -43,4 +44,5 @@ export const router = createBrowserRouter([
     ],
   },
   { path: '/student/test/composegrammar', element: <StudentComposeGrammar /> },
+  { path: '/student/test/listentyping', element: <StudentListenTyping /> },
 ]);

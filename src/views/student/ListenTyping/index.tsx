@@ -1,18 +1,19 @@
+import { Tooltip } from 'react-tooltip';
 import CheckButton from './components/CheckButton';
-import SkipButton from './components/SkipButton';
-import WordBox from './components/WordBox';
-import RestartButton from './components/RestartButton';
 import ExitButton from './components/ExitButton';
+import RestartButton from './components/RestartButton';
+import SkipButton from './components/SkipButton';
+import { SpeakerWaveIcon } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
 
-const StudentComposeGrammar = () => {
+const StudentListenTyping = () => {
   const [isLoading, setLoading] = useState(true);
   const [timeToStart, setTimeToStart] = useState(3);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 3000);
   }, []);
 
   useEffect(() => {
@@ -53,23 +54,14 @@ const StudentComposeGrammar = () => {
         </div>
         <div className="py-10">
           <div className="max-w-7xl mx-auto">
-            <div className="max-h-[200px] min-h-[200px] flex flex-wrap items-center justify-center overflow-hidden">
-              <div className="flex flex-wrap gap-6 justify-center">
-                <WordBox word="are" isWrited={true} />
-                <WordBox word="going" isWrited={true} />
-                <WordBox word="They" isWrited={true} />
-                <WordBox word="to" isWrited={true} />
-                <WordBox word="victory" isWrited={true} />
-                <WordBox word="celebrate" isWrited={false} />
-                <WordBox word="the" isWrited={false} />
-                <WordBox word="are" isWrited={true} />
-                <WordBox word="going" isWrited={true} />
-                <WordBox word="the" isWrited={false} />
-                <WordBox word="are" isWrited={true} />
-                <WordBox word="going" isWrited={true} />
-              </div>
+            <div
+              id="soundbutton"
+              className="mx-auto w-40 p-5 h-40 bg-sky-500 rounded-[36px] text-white border-4 border-sky-600 cursor-pointer hover:bg-opacity-95 active:bg-opacity-80"
+            >
+              <SpeakerWaveIcon />
             </div>
-            <div className="flex items-center justify-center mt-5">
+            <Tooltip anchorId="soundbutton" content="Alt + P" />
+            <div className="flex items-center justify-center mt-10">
               <input
                 type="text"
                 title="answer"
@@ -94,5 +86,4 @@ const StudentComposeGrammar = () => {
     </div>
   );
 };
-
-export default StudentComposeGrammar;
+export default StudentListenTyping;
