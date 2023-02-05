@@ -73,7 +73,7 @@ export default function FormLogin() {
       <div className="flex pt-5">
         <Button
           type="submit"
-          label={'Login'}
+          label={'Masuk'}
           secondary
           disabled={!isDirty || !isValid || loading}
         />

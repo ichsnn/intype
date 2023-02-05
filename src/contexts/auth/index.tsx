@@ -32,12 +32,15 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
     callback?.();
   }
 
+  function update(userData: Student | Admin, callback?: VoidFunction) {
+    setUser(userData);
+  }
+
   const handleFirstVisit = async () => {
     const access_token = localStorage.getItem('access_token');
     if (!access_token) return;
     const response = await apiGet('/student/me', { token: access_token }).catch(
       (error) => {
-        console.log(error);
         localStorage.removeItem('access_token');
       }
     );
@@ -50,7 +53,7 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, routes, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, routes, loading, update }}>
       {children}
     </AuthContext.Provider>
   );

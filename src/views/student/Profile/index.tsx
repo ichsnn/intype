@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { SETTINGS_PROFILE_STUDENT } from '@/constants';
 import { useAuth } from '@/contexts/auth';
 import { Student } from '@/models/Student';
-import moment from 'moment'
+import moment from 'moment';
+import { education } from '@/utils/getEducation';
 
 export default function StudentProfile() {
   const { user } = useAuth();
@@ -27,10 +28,10 @@ export default function StudentProfile() {
               {user?.user.username}
             </h2>
             <p className="font-semibold text-base text-slate-600 mb-1">
-              {(user as Student).education}
+              {education[(user as Student).education]}
             </p>
             <p className="font-medium text-base text-slate-600">
-              Bergabung sejak {(moment(user?.user.createdAt).year())}
+              Bergabung sejak {moment(user?.user.createdAt).year()}
             </p>
           </div>
         </div>

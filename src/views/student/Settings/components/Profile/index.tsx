@@ -1,9 +1,15 @@
 import Button from '@/components/Button';
 import { Form, FormInput, FormSelect } from '@/components/Form';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import style from './Profile.module.css';
 import { OptionProps } from '@/components/Form/types';
 import Header from '../Header';
+import { useAuth } from '@/contexts/auth';
+import { Student } from '@/models/Student';
+import { education } from '@/utils/getEducation';
+import { gender } from '@/utils/getGender';
+import { apiPost } from '@/service/api';
+import { toast } from 'react-toastify';
 
 const GenderOptions: OptionProps[] = [
   {
@@ -12,11 +18,11 @@ const GenderOptions: OptionProps[] = [
   },
   {
     value: '1',
-    label: 'Laki-laki',
+    label: gender['1'],
   },
   {
     value: '2',
-    label: 'Perempuan',
+    label: gender['2'],
   },
 ];
 
@@ -27,40 +33,72 @@ const EducationOptions: OptionProps[] = [
   },
   {
     value: '1',
-    label: 'Sekolah Menengah Pertama',
+    label: education['1'],
   },
   {
     value: '2',
-    label: 'Sekolah Menengah Atas',
+    label: education['2'],
   },
   {
     value: '3',
-    label: 'Diploma',
+    label: education['3'],
   },
   {
     value: '4',
-    label: 'Sarjana',
+    label: education['4'],
   },
   {
     value: '5',
-    label: 'Magister',
+    label: education['5'],
   },
   {
     value: '6',
-    label: 'Doktor',
+    label: education['6'],
   },
   {
     value: '7',
-    label: 'Lainnya',
+    label: education[7],
   },
 ];
 
 const StudentSettingsProfile = () => {
-  const { register, formState: {isDirty, isValid} } = useForm();
+  const { user, update } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm({
+    defaultValues: {
+      name: (user as Student).name,
+      profile: '',
+      username: (user as Student).user.username,
+      email: (user as Student).user.email,
+      gender: (user as Student).gender,
+      education: (user as Student).gender,
+    },
+  });
+
+  const onSubmit = async (values: FieldValues) => {
+    try {
+      const token = localStorage.getItem('access_token');
+      if (token === null) return;
+      const response = await apiPost('/student/update', {
+        token,
+        data: values,
+      });
+      const student = response.data as Student;
+      update(student);
+      toast(response.message, { type: 'success' });
+    } catch (error) {
+      const { response } = error as any;
+      toast(response.data.message, { type: 'error' });
+    }
+  };
+
   return (
     <section>
-      <Header label='Profil'/>
-      <Form>
+      <Header label="Profil" />
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex flex-col gap-9">
           <div className={style.form_group}>
             <FormInput
@@ -68,7 +106,7 @@ const StudentSettingsProfile = () => {
               label="Profile"
               id="profile"
               {...register('profile')}
-              accept='image/*'
+              accept="image/*"
             />
           </div>
           <div className={style.form_group}>
@@ -114,7 +152,12 @@ const StudentSettingsProfile = () => {
             />
           </div>
           <div>
-            <Button type="submit" label="Simpan Perubahan" primary />
+            <Button
+              type="submit"
+              label="Simpan Perubahan"
+              primary
+              disabled={!isValid}
+            />
           </div>
         </div>
       </Form>

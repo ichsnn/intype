@@ -9,4 +9,5 @@ export interface IAuthContext {
   logout: (callback?: VoidFunction) => void;
   routes: Route[];
   loading: boolean;
+  update: (userData: Student | Admin, callback?: VoidFunction) => void;
 }

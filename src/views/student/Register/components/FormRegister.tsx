@@ -97,7 +97,7 @@ export default function FormRegister() {
       <div className="flex pt-5">
         <Button
           type="submit"
-          label={'Login'}
+          label={'Daftar'}
           secondary
           disabled={!isDirty || !isValid || loading}
         />
