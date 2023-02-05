@@ -1,5 +1,5 @@
 import * as route from '@/constants/route';
-import { UserRole } from '@/models/User';
+import { UserRole } from '@/models/UserRole';
 
 // Admin Routes / Page
 const adminRoutes = [route.LOGIN_ADMIN, route.DASHBOARD_ADMIN];
