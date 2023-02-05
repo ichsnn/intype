@@ -12,7 +12,7 @@ import MenuItem from './components/Menu';
 const AdminMainLayout = withAuth(() => {
   return (
     <div className="min-h-screen flex">
-      <div className="h-screen bg-white flex flex-col gap-5 border-r border-2 px-4 min-w-[280px]">
+      <div className="h-screen bg-white flex flex-col gap-5 border-r border-2 px-4 min-w-[280px] z-30">
         <div className="px-2 py-4">
           <div className={'p-5 md:p-0'}>
             <h1 className="font-bold text-4xl">
@@ -63,7 +63,7 @@ const AdminMainLayout = withAuth(() => {
           </div>
         </div>
       </div>
-      <div className="flex-1 relative">
+      <div className="flex-1 relative h-screen overflow-y-scroll">
         <div>
           <div className="max-w-6xl mx-auto p-4 pt-10">
             <Outlet />
