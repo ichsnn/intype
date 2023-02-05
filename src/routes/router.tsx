@@ -72,6 +72,10 @@ export const router = createBrowserRouter([
         path: 'admin/dashboard',
         element: <AdminDashboard />,
       },
+      {
+        path: 'admin/words',
+        element: <Error404 />,
+      },
     ],
   },
 ]);

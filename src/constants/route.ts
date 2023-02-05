@@ -53,7 +53,27 @@ export const DASHBOARD_ADMIN = {
   path: '/admin/dashboard',
 };
 
+export const ADMIN_WORDS = {
+  name: 'Kelola Kata',
+  path: '/admin/words',
+};
+
+export const ADMIN_STUDENTS = {
+  name: 'Pelajar',
+  path: '/admin/students',
+};
+
+export const ADMIN_TESTS = {
+  name: 'Tes',
+  path: '/admin/tests',
+};
+
 export const STUDENT_LOGOUT = {
   name: 'Keluar',
   path: '/student/logout',
+};
+
+export const ADMIN_LOGOUT = {
+  name: 'Keluar',
+  path: '/admin/logout',
 };
