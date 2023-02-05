@@ -6,7 +6,8 @@ import {
   Squares2X2Icon,
   UserGroupIcon,
 } from '@heroicons/react/24/solid';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
+import MenuItem from './components/Menu';
 
 const AdminMainLayout = withAuth(() => {
   return (
@@ -20,26 +21,31 @@ const AdminMainLayout = withAuth(() => {
           </div>
         </div>
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-3 p-3 rounded-md font-semibold text-base cursor-pointer text-white hover:bg-sky-500 hover:text-white bg-sky-500">
-            <Squares2X2Icon className="h-6 w-6" />
-            <span>Dashboard</span>
-          </div>
-          <div className="flex items-center gap-3 p-3 rounded-md font-semibold text-base cursor-pointer text-slate-600 hover:bg-sky-500 hover:text-white">
-            <BookmarkIcon className="h-6 w-6" />
-            <span>Kelola Kata</span>
-          </div>
-          <div className="flex items-center gap-3 p-3 rounded-md font-semibold text-base cursor-pointer text-slate-600 hover:bg-sky-500 hover:text-white">
-            <UserGroupIcon className="h-6 w-6" />
-            <span>Pelajar</span>
-          </div>
-          <div className="flex items-center gap-3 p-3 rounded-md font-semibold text-base cursor-pointer text-slate-600 hover:bg-sky-500 hover:text-white">
-            <ClipboardDocumentCheckIcon className="h-6 w-6" />
-            <span>Tes</span>
-          </div>
-          <div className="flex items-center gap-3 p-3 rounded-md font-semibold text-base cursor-pointer text-slate-600 hover:bg-sky-500 hover:text-white">
-            <ArrowLeftOnRectangleIcon className="h-6 w-6" />
-            <span>Keluar</span>
-          </div>
+          <MenuItem
+            icon={<Squares2X2Icon className="h-6 w-6" />}
+            label={'Dashboard'}
+            to={'/admin/dashboard'}
+          />
+          <MenuItem
+            icon={<BookmarkIcon className="h-6 w-6" />}
+            label={'Kelola Kata'}
+            to={'/admin/words'}
+          />
+          <MenuItem
+            icon={<UserGroupIcon className="h-6 w-6" />}
+            label={'Pelajar'}
+            to={'/admin/students'}
+          />
+          <MenuItem
+            icon={<ClipboardDocumentCheckIcon className="h-6 w-6" />}
+            label={'Tes'}
+            to={'/admin/tests'}
+          />
+          <MenuItem
+            icon={<ArrowLeftOnRectangleIcon className="h-6 w-6" />}
+            label={'Keluar'}
+            to={'/admin/logout'}
+          />
         </div>
         <div className="mt-auto border-t py-5 flex gap-4 items-center ">
           <div className="h-10 w-10 overflow-clip rounded-full">
