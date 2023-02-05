@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const apiGet = (
   path: string,
-  token: string,
+  token?: string,
   withoutBaseUrl?: boolean
 ) => {
   const baseURL = 'http://localhost:3000';
@@ -16,11 +16,12 @@ export const apiGet = (
 
 export const apiPost = (
   path: string,
-  token: string,
+  data?: any,
+  token?: string,
   withoutBaseUrl?: boolean
 ) => {
   const baseURL = 'http://localhost:3000';
-  return axios.post(path, {
+  return axios.post(path, data, {
     baseURL: withoutBaseUrl ? undefined : baseURL,
     headers: {
       Authorization: `Bearer ${token}`,

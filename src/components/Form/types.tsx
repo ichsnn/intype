@@ -8,7 +8,11 @@ export interface FormInputProps
   label?: string;
 }
 
-export interface FormSelectProps extends React.DetailedHTMLProps<React.SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement> {
+export interface FormSelectProps
+  extends React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  > {
   label?: string;
   options: OptionProps[];
 }
