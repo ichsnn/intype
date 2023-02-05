@@ -6,6 +6,7 @@ import StudentProfile from './Profile';
 import StudentSettings from './Settings';
 import StudentComposeGrammar from './ComposeGrammar';
 import StudentListenTyping from './ListenTyping';
+import StudentLeaderboard from './Leaderboard';
 
 export {
   StudentLogin,
@@ -16,4 +17,5 @@ export {
   StudentSettings,
   StudentComposeGrammar,
   StudentListenTyping,
+  StudentLeaderboard,
 };

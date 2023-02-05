@@ -16,6 +16,7 @@ import {
   StudentTest,
   StudentComposeGrammar,
   StudentListenTyping,
+  StudentLeaderboard,
 } from '@/views';
 
 export const router = createBrowserRouter([
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
         path: 'student/settings',
         element: <StudentSettingsLayout />,
         children: [{ path: ':type', element: <StudentSettings /> }],
+      },
+      {
+        path: 'student/leaderboard',
+        element: <StudentLeaderboard />,
       },
     ],
   },

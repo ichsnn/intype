@@ -4,7 +4,7 @@ import { Route } from '@/models/Route';
 
 export function Menu({ routes }: { routes: Route[] }) {
   return (
-    <ul className="flex gap-1">
+    <ul className="flex gap-2">
       {routes.map((route) => (
         <MenuItem key={route.path} {...route} />
       ))}
