@@ -4,8 +4,12 @@ import ComposeGrammarStats from './components/ComposeGrammarStats';
 import ListenTypingStats from './components/ListenTypingStats';
 import { useNavigate } from 'react-router-dom';
 import { SETTINGS_PROFILE_STUDENT } from '@/constants';
+import { useAuth } from '@/contexts/auth';
+import { Student } from '@/models/Student';
+import moment from 'moment'
 
 export default function StudentProfile() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   return (
     <div className="max-w-7xl mx-auto space-y-10 divide-y text-slate-900">
@@ -19,12 +23,14 @@ export default function StudentProfile() {
             />
           </div>
           <div>
-            <h2 className="font-bold text-2xl text-slate-900 mb-2">Username</h2>
+            <h2 className="font-bold text-2xl text-slate-900 mb-2">
+              {user?.user.username}
+            </h2>
             <p className="font-semibold text-base text-slate-600 mb-1">
-              Education
+              {(user as Student).education}
             </p>
             <p className="font-medium text-base text-slate-600">
-              Bergabung sejak 2023
+              Bergabung sejak {(moment(user?.user.createdAt).year())}
             </p>
           </div>
         </div>

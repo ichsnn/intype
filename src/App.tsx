@@ -5,9 +5,7 @@ import { router } from './routes';
 function App() {
   return (
     <AuthProvider>
-      <AuthContext.Consumer>
-        {(value) => !value.loading && <RouterProvider router={router} />}
-      </AuthContext.Consumer>
+      <RouterProvider router={router} />
     </AuthProvider>
   );
 }

@@ -11,11 +11,16 @@ import {
 } from '@/constants';
 import { ProfileMenu } from './ProfileMenu';
 import { Menu } from './Menu';
-
-const UserNavigationRoutes: Route[] = [TEST, LEADERBOARD, ABOUT];
-const ProfileNavigationRoutes: Route[] = [{...PROFILE, path: `${PROFILE.path}/username`}, SETTINGS_PROFILE_STUDENT, STUDENT_LOGOUT];
+import { useAuth } from '@/contexts/auth';
 
 export default function Navigation() {
+  const { user } = useAuth();
+  const UserNavigationRoutes: Route[] = [TEST, LEADERBOARD, ABOUT];
+  const ProfileNavigationRoutes: Route[] = [
+    { ...PROFILE, path: `${PROFILE.path}/${user?.user.username}` },
+    SETTINGS_PROFILE_STUDENT,
+    STUDENT_LOGOUT,
+  ];
   return (
     <nav className="max-w-7xl mx-auto py-3 flex justify-between">
       <div className="flex items-center gap-11">
