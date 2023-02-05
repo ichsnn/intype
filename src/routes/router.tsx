@@ -22,6 +22,7 @@ import {
   AdminLogin,
   AdminDashboard,
   AdminManageWords,
+  AdminLogout,
 } from '@/views';
 
 export const router = createBrowserRouter([
@@ -79,4 +80,5 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  { path: 'admin/logout', element: <AdminLogout /> },
 ]);

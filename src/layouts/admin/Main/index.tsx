@@ -31,7 +31,7 @@ const AdminMainLayout = withAuth(() => {
             label={'Kelola Kata'}
             to={'/admin/words'}
           />
-          <MenuItem
+          {/* <MenuItem
             icon={<UserGroupIcon className="h-6 w-6" />}
             label={'Pelajar'}
             to={'/admin/students'}
@@ -40,7 +40,7 @@ const AdminMainLayout = withAuth(() => {
             icon={<ClipboardDocumentCheckIcon className="h-6 w-6" />}
             label={'Tes'}
             to={'/admin/tests'}
-          />
+          /> */}
           <MenuItem
             icon={<ArrowLeftOnRectangleIcon className="h-6 w-6" />}
             label={'Keluar'}

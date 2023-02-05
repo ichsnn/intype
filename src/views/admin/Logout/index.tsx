@@ -3,7 +3,7 @@ import { withAuth } from '@/hoc/auth';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const StudentLogout = withAuth(() => {
+const AdminLogout = withAuth(() => {
   const { logout, user } = useAuth();
   const navigate = useNavigate();
 
@@ -13,7 +13,7 @@ const StudentLogout = withAuth(() => {
 
   useEffect(() => {
     if (!user) {
-      navigate('/student/login');
+      navigate('/admin/login');
     }
   }, [user]);
 
@@ -24,4 +24,4 @@ const StudentLogout = withAuth(() => {
   );
 });
 
-export default StudentLogout;
+export default AdminLogout;
