@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
+  AdminAuthLayout,
   StudentAuthLayout,
   StudentLayout,
   StudentSettingsLayout,
@@ -17,6 +18,7 @@ import {
   StudentComposeGrammar,
   StudentListenTyping,
   StudentLeaderboard,
+  AdminLogin,
 } from '@/views';
 
 export const router = createBrowserRouter([
@@ -24,6 +26,7 @@ export const router = createBrowserRouter([
     path: '/',
     element: <PublicHome />,
   },
+  // Student
   {
     element: <StudentAuthLayout />,
     children: [
@@ -47,7 +50,17 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  { path: '/student/test/composegrammar', element: <StudentComposeGrammar /> },
-  { path: '/student/test/listentyping', element: <StudentListenTyping /> },
+  { path: 'student/test/composegrammar', element: <StudentComposeGrammar /> },
+  { path: 'student/test/listentyping', element: <StudentListenTyping /> },
   { path: 'student/logout', element: <StudentLogout /> },
+  // Admin
+  {
+    element: <AdminAuthLayout />,
+    children: [
+      {
+        path: 'admin/login',
+        element: <AdminLogin />,
+      },
+    ],
+  },
 ]);

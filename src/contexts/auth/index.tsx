@@ -11,6 +11,7 @@ import { getRoutes } from '@/routes';
 import { Student } from '@/models/Student';
 import { Admin } from '@/models/Admin';
 import { apiGet } from '@/service/api';
+import jwt_decode from 'jwt-decode';
 
 export const AuthContext = createContext<IAuthContext>(null!);
 
@@ -34,12 +35,22 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
 
   function update(userData: Student | Admin, callback?: VoidFunction) {
     setUser(userData);
+    callback?.();
   }
 
   const handleFirstVisit = async () => {
-    const access_token = localStorage.getItem('access_token');
+    const access_token = localStorage.getItem('access_token') as string;
     if (!access_token) return;
-    const response = await apiGet('/student/me', { token: access_token }).catch(
+    const payload = jwt_decode(access_token);
+    const { role } = payload as any;
+    if (!access_token) return;
+    let path = '';
+    if (role === 'admin') {
+      path = '/admin/me';
+    } else if (role === 'student') {
+      path = '/student/me';
+    }
+    const response = await apiGet(path, { token: access_token }).catch(
       (error) => {
         localStorage.removeItem('access_token');
       }
@@ -53,7 +64,9 @@ export const AuthProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, routes, loading, update }}>
+    <AuthContext.Provider
+      value={{ user, login, logout, routes, loading, update }}
+    >
       {children}
     </AuthContext.Provider>
   );
