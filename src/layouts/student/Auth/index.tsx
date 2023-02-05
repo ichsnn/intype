@@ -3,7 +3,7 @@ import Container from './components/Container';
 import Sidebar from './components/Sidebar';
 import { withoutAuth } from '@/hoc/auth';
 
-const StudentAuthLayout = () => {
+const StudentAuthLayout = withoutAuth(() => {
   return (
     <Container>
       <Sidebar />
@@ -15,6 +15,6 @@ const StudentAuthLayout = () => {
       </main>
     </Container>
   );
-};
+});
 
 export default StudentAuthLayout;

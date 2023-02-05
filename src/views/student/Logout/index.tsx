@@ -1,18 +1,27 @@
+import { useAuth } from '@/contexts/auth';
+import { withAuth } from '@/hoc/auth';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
-export default function StudentLogout() {
-  const [loading, setLoading] = useState(true);
+const StudentLogout = withAuth(() => {
+  const { logout, user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000)
-  }, [])
+    logout();
+  }, []);
 
-  if(loading) {
-    return <div>Keluar dari aplikasi, tunggu sebentar...</div>;
-  }
+  useEffect(() => {
+    if (!user) {
+      navigate('/student/login');
+    }
+  }, [user]);
 
-  return <Navigate to="/student/login" />;
-}
+  return (
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-2xl font-bold">Keluar dari akun...</div>
+    </div>
+  );
+});
+
+export default StudentLogout;

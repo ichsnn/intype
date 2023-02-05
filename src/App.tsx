@@ -1,11 +1,13 @@
 import { RouterProvider } from 'react-router-dom';
-import { AuthProvider } from './contexts/auth';
+import { AuthContext, AuthProvider } from './contexts/auth';
 import { router } from './routes';
 
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <AuthContext.Consumer>
+        {(value) => !value.loading && <RouterProvider router={router} />}
+      </AuthContext.Consumer>
     </AuthProvider>
   );
 }

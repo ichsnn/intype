@@ -20,8 +20,10 @@ export default function FormRegister() {
   async function onSubmit(data: FieldValues) {
     try {
       setLoading(true);
-      const response = await apiPost('/student/register', data);
-      toast(response.data.message, { type: 'success' });
+      const response = await apiPost('/student/register', {
+        data,
+      });
+      toast(response.message, { type: 'success' });
       navigate('/student/login');
     } catch (error) {
       const { response } = error as any;

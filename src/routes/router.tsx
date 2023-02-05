@@ -29,7 +29,6 @@ export const router = createBrowserRouter([
     children: [
       { path: 'student/login', element: <StudentLogin /> },
       { path: 'student/register', element: <StudentRegister /> },
-      { path: 'student/logout', element: <StudentLogout /> },
     ],
   },
   {
@@ -50,4 +49,5 @@ export const router = createBrowserRouter([
   },
   { path: '/student/test/composegrammar', element: <StudentComposeGrammar /> },
   { path: '/student/test/listentyping', element: <StudentListenTyping /> },
+  { path: 'student/logout', element: <StudentLogout /> },
 ]);

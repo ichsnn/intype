@@ -4,6 +4,10 @@ import { FieldValues, useForm } from 'react-hook-form';
 import ForgotPassword from './ForgotPassword';
 import { useAuth } from '@/contexts/auth';
 import { UserData } from '@/tests';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { apiGet, apiPost } from '@/service/api';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormLogin() {
   const {
@@ -13,10 +17,30 @@ export default function FormLogin() {
   } = useForm();
 
   const { login } = useAuth();
+  const navigate = useNavigate();
 
-  function onSubmit(data: FieldValues) {
-    console.log(data);
-    login(UserData.student);
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(value: FieldValues) {
+    try {
+      setLoading(true);
+      const response = await apiPost('/student/login', {
+        data: value,
+      });
+      const { access_token } = response.data;
+      localStorage.setItem('access_token', access_token);
+      const userResponse = await apiGet('/student/me', {
+        token: access_token,
+      });
+      toast(response.message, { type: 'success' });
+      login(userResponse.data);
+    } catch (error) {
+      const { response } = error as any;
+      toast(response.data.message, { type: 'error' });
+    } finally {
+      setLoading(false);
+    }
+    // login(UserData.student);
   }
 
   return (
@@ -26,6 +50,7 @@ export default function FormLogin() {
           <FormInput
             label="Username / Email"
             id="identifier"
+            disabled={loading}
             required
             placeholder="Masukkan username atau email"
             {...register('identifier', { required: true })}
@@ -35,9 +60,10 @@ export default function FormLogin() {
           <FormInput
             label="Password"
             id="password"
+            disabled={loading}
             required
             placeholder="Masukkan password"
-            {...register('password', { required: true })}
+            {...register('password', { required: true, minLength: 8 })}
           />
         </FormInputWrapper>
         <div className="text-right">
@@ -49,7 +75,7 @@ export default function FormLogin() {
           type="submit"
           label={'Login'}
           secondary
-          disabled={!isDirty || !isValid}
+          disabled={!isDirty || !isValid || loading}
         />
       </div>
     </Form>
