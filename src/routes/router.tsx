@@ -21,6 +21,7 @@ import {
   StudentLeaderboard,
   AdminLogin,
   AdminDashboard,
+  AdminManageWords,
 } from '@/views';
 
 export const router = createBrowserRouter([
@@ -74,7 +75,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'admin/words',
-        element: <Error404 />,
+        element: <AdminManageWords />,
       },
     ],
   },
