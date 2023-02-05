@@ -5,7 +5,7 @@ import { DASHBOARD_ADMIN, LOGIN_STUDENT, TEST } from '@/constants';
 
 export function withAuth(Component: ComponentType) {
   return function AuthComponent(props: ComponentProps<ComponentType>) {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     if (!user) return <Navigate to={LOGIN_STUDENT.path} replace />;
 

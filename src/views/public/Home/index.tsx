@@ -3,8 +3,10 @@
  *
  */
 
-const PublicHome = () => {
+import { withoutAuth } from '@/hoc/auth';
+
+const PublicHome = withoutAuth(() => {
   return <div>Landing Page</div>;
-};
+});
 
 export default PublicHome;

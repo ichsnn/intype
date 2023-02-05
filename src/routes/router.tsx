@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import {
   AdminAuthLayout,
+  AdminMainLayout,
   StudentAuthLayout,
   StudentLayout,
   StudentSettingsLayout,
@@ -19,6 +20,7 @@ import {
   StudentListenTyping,
   StudentLeaderboard,
   AdminLogin,
+  AdminDashboard,
 } from '@/views';
 
 export const router = createBrowserRouter([
@@ -60,6 +62,15 @@ export const router = createBrowserRouter([
       {
         path: 'admin/login',
         element: <AdminLogin />,
+      },
+    ],
+  },
+  {
+    element: <AdminMainLayout />,
+    children: [
+      {
+        path: 'admin/dashboard',
+        element: <AdminDashboard />,
       },
     ],
   },
