@@ -11,7 +11,7 @@ export default function FormRegister() {
     register,
     handleSubmit,
     watch,
-    formState: { isDirty, isValid, dirtyFields },
+    formState: { isDirty, isValid },
   } = useForm();
 
   const [loading, setLoading] = useState(false);
