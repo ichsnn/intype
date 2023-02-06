@@ -7,19 +7,9 @@ import {
   YAxis,
   CartesianGrid,
 } from 'recharts';
+import { StatsData } from './types';
 
-// create dummy data
-const data = [
-  { name: 'Senin', Score: 0 },
-  { name: 'Selasa', Score: 200 },
-  { name: 'Rabu', Score: 0 },
-  { name: 'Kamis', Score: 150 },
-  { name: 'Jumat', Score: 250 },
-  { name: 'Sabtu', Score: 250 },
-  { name: 'Minggu', Score: 250 },
-];
-
-export default function ListenTypingStats() {
+export default function ListenTypingStats({ data }: { data: StatsData[] }) {
   return (
     <ResponsiveContainer height={'100%'} width={'99%'}>
       <AreaChart data={data} margin={{ right: 36, left: 0, top: 18 }}>
@@ -37,13 +27,13 @@ export default function ListenTypingStats() {
           </linearGradient>
         </defs>
         <Area
-          dataKey="Score"
+          dataKey="Skor"
           stroke="#EA580C"
           fillOpacity={1}
           fill="url(#listenTypingStatsColor)"
         />
-        <XAxis dataKey={'name'} />
-        <YAxis dataKey={'Score'} mirror />
+        <XAxis dataKey={'Tanggal'} />
+        <YAxis dataKey={'Skor'} mirror />
         <Tooltip />
       </AreaChart>
     </ResponsiveContainer>

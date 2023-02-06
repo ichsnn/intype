@@ -8,10 +8,36 @@ import { useAuth } from '@/contexts/auth';
 import { Student } from '@/models/Student';
 import moment from 'moment';
 import { education } from '@/utils/getEducation';
+import { StatsData } from './components/types';
+import { useEffect, useState } from 'react';
+import { apiGet } from '@/service/api';
+import { toast } from 'react-toastify';
 
 export default function StudentProfile() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const [dataCompose, setDataCompose] = useState<StatsData[]>([]);
+  const [dataListen, setDataListen] = useState<StatsData[]>([]);
+
+  const getStats = async () => {
+    try {
+      const token = localStorage.getItem('access_token') as string;
+      const response = await apiGet('/student/tests/stats/listentyping/week', {
+        token,
+      });
+      const { data } = response;
+      console.log(data);
+      setDataCompose(data[1]);
+      setDataListen(data[2]);
+    } catch (error) {
+      const { response } = error as any;
+      toast(response?.data?.message || 'Terjadi kesalahan');
+    }
+  };
+
+  useEffect(() => {
+    getStats();
+  }, []);
   return (
     <div className="max-w-7xl mx-auto space-y-10 divide-y text-slate-900">
       <section id="profile" className="flex justify-between">
@@ -58,7 +84,7 @@ export default function StudentProfile() {
               Test Menyusun Grammar
             </h3>
             <div className="h-72">
-              <ComposeGrammarStats />
+              <ComposeGrammarStats data={dataCompose} />
             </div>
           </div>
           <div className="flex-1">
@@ -66,7 +92,7 @@ export default function StudentProfile() {
               Test Mendengar & Mengetik
             </h3>
             <div className="h-72">
-              <ListenTypingStats />
+              <ListenTypingStats data={dataListen} />
             </div>
           </div>
         </div>
