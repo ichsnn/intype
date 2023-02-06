@@ -10,6 +10,8 @@ export default function Button({
   iconRight,
   whitePrimary,
   whiteSecondary,
+  normal,
+  danger,
   ...props
 }: ButtonProps) {
   const cx = cn.bind(style);
@@ -24,6 +26,8 @@ export default function Button({
           success: success,
           whitePrimary: whitePrimary,
           whiteSecondary: whiteSecondary,
+          danger: danger,
+          normal: normal,
         }
       )}
     >

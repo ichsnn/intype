@@ -1,8 +1,36 @@
 import Button from '@/components/Button';
-import { FormSelect } from '@/components/Form';
+import { Form, FormInput, FormSelect } from '@/components/Form';
+import { useEffect, useState } from 'react';
 import WordsTable from './components/WordsTable';
+import { columns, useWords } from './helpers';
+import { WordTableData } from './types';
+import ReactModal from 'react-modal';
+import ModalAddWord from './components/ModalAddWord';
+import ModalUpdateWord from './components/ModalUpdateWord';
+import { apiGet } from '@/service/api';
+import { toast } from 'react-toastify';
 
 export default function AdminManageWords() {
+  const [showAddWord, setShowAddWord] = useState(false);
+  const [showUpdateWord, setShowUpdateWord] = useState(false);
+  const wordState = useWords();
+  const { words, setWords } = wordState;
+
+  const fetchWords = async () => {
+    try {
+      const response = await apiGet('/words', {});
+      const { data } = response;
+      setWords(data);
+    } catch (error) {
+      const { response } = error as any;
+      toast(response.data.message, { type: 'error' });
+    }
+  };
+
+  useEffect(() => {
+    fetchWords();
+  }, []);
+
   return (
     <>
       <div className="mb-10">
@@ -11,34 +39,26 @@ export default function AdminManageWords() {
         </h1>
       </div>
       <div>
-        <div className="flex gap-2 justify-between items-center mb-6">
-          <div className="flex gap-2">
-            <input
-              type="text"
-              placeholder="Cari kata..."
-              className="border border-slate-500 px-6 py-3 rounded-full min-w-[200px] bg-white"
-            />
-            <select
-              name="type"
-              title="Jenis"
-              className="border px-6 py-3 rounded-full border-slate-500 focus:outline"
-            >
-              <option value="">Pilih Jenis</option>
-              <option value="adjective">Adjective</option>
-              <option value="conjunction">Adverb</option>
-              <option value="interjection">Interjection</option>
-              <option value="noun">Noun</option>
-              <option value="preposition">Preposition</option>
-              <option value="pronoun">Pronoun</option>
-              <option value="verb">Verb</option>
-            </select>
-          </div>
-          <div>
-            <Button label="Tambah Kata" primary />
+        <div className="flex mb-4">
+          <div className="ml-auto">
+            <div>
+              <Button
+                label="Tambah Kata"
+                primary
+                onClick={() => setShowAddWord(true)}
+              />
+            </div>
           </div>
         </div>
-        <WordsTable />
+        <WordsTable data={words} columns={columns(wordState)} />
       </div>
+      {showAddWord && (
+        <ModalAddWord
+          isOpen={showAddWord}
+          setIsOpen={setShowAddWord}
+          wordState={wordState}
+        />
+      )}
     </>
   );
 }

@@ -31,7 +31,7 @@ export default function Table({
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     //
-    debugTable: true,
+    // debugTable: true,
   });
 
   return (

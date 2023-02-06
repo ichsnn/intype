@@ -17,3 +17,11 @@
 .whiteSecondary {
   @apply bg-white text-orange-400 border-orange-400 disabled:bg-gray-200 border-inherit enabled:active:bg-transparent active:text-white transition-colors;
 }
+
+.danger {
+  @apply bg-red-500 text-white border-red-500 disabled:bg-red-200 border-inherit enabled:active:bg-red-600;
+}
+
+.normal {
+  @apply bg-gray-500 text-white border-gray-500 disabled:bg-gray-200 border-inherit enabled:active:bg-gray-600;
+}
