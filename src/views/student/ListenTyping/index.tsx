@@ -7,24 +7,25 @@ import { apiGet, apiPost } from '@/service/api';
 import { Word } from '@/models/Word';
 import PlaySoundButton from './components/PlaySoundButton';
 import { formatDuration } from '@/utils/formatDuration';
-import { Questions } from '@/models/Questions';
+import { typingQuestions } from '@/models/Questions';
 import ReactModal from 'react-modal';
 import Button from '@/components/Button';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { withAuth } from '@/hoc/auth';
 
-const loadingDefault = false;
+const loadingDefault = true;
 const timeToStartDefault = 3;
-const totalDurationDefault = 5;
+const totalDurationDefault = 30;
 const durationDefault = totalDurationDefault;
 const isPlayingDefault = false;
 const scoreDefault = 0;
 const wordsDefault: Word[] = [];
-const questionsDefault: Questions[] = [];
+const questionsDefault: typingQuestions[] = [];
 const currentQuestionDefault = '';
 const isTimeOverDefault = false;
 
-const StudentListenTyping = () => {
+const StudentListenTyping = withAuth(() => {
   const answeredScore = 2;
   const answeredDuration = 0;
 
@@ -35,7 +36,7 @@ const StudentListenTyping = () => {
   const [isPlaying, setPlaying] = useState(isPlayingDefault);
   const [score, setScore] = useState(scoreDefault);
   const [words, setWords] = useState<Word[]>(wordsDefault);
-  const [questions, setQuestions] = useState<Questions[]>(questionsDefault);
+  const [questions, setQuestions] = useState<typingQuestions[]>(questionsDefault);
   const [currentQuestion, setCurrentQuestion] = useState(
     currentQuestionDefault
   );
@@ -298,5 +299,5 @@ const StudentListenTyping = () => {
       </div>
     </div>
   );
-};
+});
 export default StudentListenTyping;

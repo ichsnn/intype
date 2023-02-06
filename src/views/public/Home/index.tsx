@@ -4,9 +4,10 @@
  */
 
 import { withoutAuth } from '@/hoc/auth';
+import { Navigate } from 'react-router-dom';
 
 const PublicHome = withoutAuth(() => {
-  return <div>Landing Page</div>;
+  return <Navigate to="/student/login" />;
 });
 
 export default PublicHome;
