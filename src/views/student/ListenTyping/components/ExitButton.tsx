@@ -1,4 +1,3 @@
-import { useHotkeys } from 'react-hotkeys-hook';
 import { useNavigate } from 'react-router-dom';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { Tooltip } from 'react-tooltip';
@@ -8,9 +7,6 @@ export default function ExitButton() {
   const exitTest = () => {
     navigate('/student/test');
   };
-  useHotkeys('esc', () => {
-    exitTest();
-  });
   return (
     <>
       <div

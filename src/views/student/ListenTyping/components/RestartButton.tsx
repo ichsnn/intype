@@ -1,18 +1,23 @@
 import { ArrowPathIcon } from '@heroicons/react/24/solid';
-import { useHotkeys } from 'react-hotkeys-hook';
-import {Tooltip} from 'react-tooltip';
+import { Tooltip } from 'react-tooltip';
 
-export default function RestartButton() {
-  useHotkeys('f5', (e) => {
-    e.preventDefault()
-    alert('restarted')
-  })
+export default function RestartButton({
+  handleReset,
+}: {
+  handleReset: VoidFunction;
+}) {
   return (
     <>
-      <div id='restartbutton' className="h-7 w-7 cursor-pointer">
+      <button
+        type="button"
+        id="restartbutton"
+        className="h-7 w-7 cursor-pointer"
+        onClick={() => handleReset()}
+      >
         <ArrowPathIcon />
-      </div>
-      <Tooltip anchorId='restartbutton' content='F5'/>
+        <span className="hidden">Restart</span>
+      </button>
+      <Tooltip anchorId="restartbutton" content="F5" />
     </>
   );
 }
