@@ -1,6 +1,16 @@
+import { apiGet } from '@/service/api';
 import { education } from '@/utils/getEducation';
-import { useState } from 'react';
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Sector, Text } from 'recharts';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Sector,
+  Text,
+} from 'recharts';
 
 const renderActiveShape = (props: any) => {
   const RADIAN = Math.PI / 180;
@@ -82,19 +92,15 @@ const renderActiveShape = (props: any) => {
   );
 };
 
-const data = [
-  { name: education['1'], value: 400 },
-  { name: education['2'], value: 300 },
-  { name: education['3'], value: 300 },
-  { name: education['4'], value: 300 },
-  { name: education['5'], value: 300 },
-  { name: education['6'], value: 300 },
-  { name: education['7'], value: 300 },
-  { name: 'Tidak Diketahui', value: 300 },
-];
-
 export default function OverviewPelajar() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [overviewData, setOverviewData] = useState<
+    {
+      name: string;
+      value: number;
+    }[]
+  >([]);
+
   const onPieEnter = (_: any, index: any) => {
     setActiveIndex(index);
   };
@@ -110,6 +116,34 @@ export default function OverviewPelajar() {
     '#9F7AEA',
     '#ED64A6',
   ];
+
+  const getStats = async () => {
+    try {
+      const response = await apiGet('/student/stats/education', {});
+      const { data } = response;
+      setOverviewData(data);
+    } catch (error) {
+      const response = error as any;
+      toast(response.message, { type: 'error' });
+    }
+  };
+
+  useEffect(() => {
+    getStats();
+  }, []);
+
+  useEffect(() => {
+    // set active index to highest value
+    let highestValue = 0;
+    let highestIndex = 0;
+    overviewData.forEach((data, index) => {
+      if (data.value > highestValue) {
+        highestValue = data.value;
+        highestIndex = index;
+      }
+    });
+    setActiveIndex(highestIndex);
+  }, [overviewData]);
 
   return (
     <div className="relative bg-white border shadow-md min-h-[320px] min-w-[280px] rounded-xl p-4 py-10">
@@ -128,12 +162,12 @@ export default function OverviewPelajar() {
                 activeShape={renderActiveShape}
                 cx="50%"
                 cy="50%"
-                data={data}
+                data={overviewData}
                 innerRadius={90}
                 dataKey="value"
                 onMouseEnter={onPieEnter}
               >
-                {data.map((entry, index) => (
+                {overviewData.map((entry, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
