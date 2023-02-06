@@ -15,7 +15,7 @@ import { useAuth } from '@/contexts/auth';
 
 export default function Navigation() {
   const { user } = useAuth();
-  const UserNavigationRoutes: Route[] = [TEST, LEADERBOARD, ABOUT];
+  const UserNavigationRoutes: Route[] = [TEST, LEADERBOARD];
   const ProfileNavigationRoutes: Route[] = [
     { ...PROFILE, path: `${PROFILE.path}/${user?.user.username}` },
     SETTINGS_PROFILE_STUDENT,
