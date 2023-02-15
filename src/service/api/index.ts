@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-type APIOptions = {
-  token?: string;
-  withoutBaseUrl?: boolean;
-};
-
-const baseURL = 'process.env.REACT_APP_API_URL';
+const baseURL = import.meta.env.VITE_INTYPE_API_ENDPOINT;
 
 export const apiGet = async (
   path: string,
@@ -14,7 +9,6 @@ export const apiGet = async (
     withoutBaseUrl?: boolean;
   }
 ) => {
-  const baseURL = 'http://localhost:3000';
   const res = await axios.get(path, {
     baseURL: options?.withoutBaseUrl ? undefined : baseURL,
     headers: {
@@ -36,7 +30,6 @@ export const apiPost = async (
     withoutBaseUrl?: boolean;
   }
 ) => {
-  const baseURL = 'http://localhost:3000';
   const res = await axios.post(path, data, {
     baseURL: withoutBaseUrl ? undefined : baseURL,
     headers: {
