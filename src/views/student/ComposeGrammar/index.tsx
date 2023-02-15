@@ -4,15 +4,15 @@ import WordBox from './components/WordBox';
 import RestartButton from './components/RestartButton';
 import ExitButton from './components/ExitButton';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { generateSentence } from '@/utils/generateSentence';
 import { grammarQuestions } from '@/models/Questions';
 import { formatDuration } from '@/utils/formatDuration';
 import ReactModal from 'react-modal';
 import { Link } from 'react-router-dom';
 import Button from '@/components/Button';
-import { apiPost } from '@/service/api';
+import { apiGet, apiPost } from '@/service/api';
 import { toast } from 'react-toastify';
 import { withAuth } from '@/hoc/auth';
+import { getLocalStorage } from '@/utils/getLocalStorage';
 
 interface WordBoxProps {
   word: string;
@@ -48,6 +48,7 @@ const StudentComposeGrammar = withAuth(() => {
     useState<grammarQuestions[]>(questionsDefault);
   const [randomWords, setRandomWords] =
     useState<WordBoxProps[]>(randomWordsDefault);
+  const [sentences, setSentences] = useState<string[]>([]);
   const [isTimeOver, setIsTimeOver] = useState<boolean>(isTimeOverDefault);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -67,14 +68,12 @@ const StudentComposeGrammar = withAuth(() => {
 
   const handleGetSentence = async () => {
     try {
-      const result = await generateSentence();
-      const { choices } = result.data;
-      if (choices.length > 0)
-        if (choices[0].text) {
-          const newSentence = choices[0].text.replace(/[^a-zA-Z ]/g, '');
-          setCurrentQuestion(newSentence);
-          setLoading(false);
-        }
+      const result = await apiGet('/student/tests/composegrammar/sentences', {
+        token: getLocalStorage('access_token'),
+      });
+      const { data } = result;
+      setSentences((prev) => [...prev, ...data]);
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }

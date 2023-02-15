@@ -1,20 +1,24 @@
 import axios from 'axios';
 
+type APIOptions = {
+  token?: string;
+  withoutBaseUrl?: boolean;
+};
+
+const baseURL = 'process.env.REACT_APP_API_URL';
+
 export const apiGet = async (
   path: string,
-  {
-    token,
-    withoutBaseUrl,
-  }: {
-    token?: string;
+  options?: {
+    token?: string | null;
     withoutBaseUrl?: boolean;
   }
 ) => {
   const baseURL = 'http://localhost:3000';
   const res = await axios.get(path, {
-    baseURL: withoutBaseUrl ? undefined : baseURL,
+    baseURL: options?.withoutBaseUrl ? undefined : baseURL,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${options?.token}`,
     },
   });
   return res.data;
