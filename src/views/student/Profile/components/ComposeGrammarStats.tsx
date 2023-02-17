@@ -10,7 +10,6 @@ import {
 import { StatsData } from './types';
 
 export default function ComposeGrammarStats({ data }: { data: StatsData[] }) {
-  console.log(data);
   return (
     <ResponsiveContainer height={'100%'} width={'99%'}>
       <AreaChart data={data} margin={{ right: 36, left: 0, top: 18 }}>

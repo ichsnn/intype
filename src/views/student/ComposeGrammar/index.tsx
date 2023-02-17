@@ -139,7 +139,6 @@ const StudentComposeGrammar = withAuth(() => {
 
   const handleSaveResult = async () => {
     try {
-      console.log(questions);
       await apiPost('/student/tests/composegrammar', {
         token: getLocalStorage('access_token'),
         data: {
@@ -165,7 +164,6 @@ const StudentComposeGrammar = withAuth(() => {
         };
       });
       setRandomWords(newWords);
-      console.log(sentence);
       setCurrentQuestion(sentence);
     }
   };

@@ -26,7 +26,6 @@ export default function StudentProfile() {
         token,
       });
       const { data } = response;
-      console.log(data);
       setDataCompose(data[1]);
       setDataListen(data[2]);
     } catch (error) {

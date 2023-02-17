@@ -66,7 +66,6 @@ const StudentListenTyping = withAuth(() => {
   };
 
   const handleSubmitAnswer = () => {
-    console.log('p');
     if (inputRef.current && isTimeOver === false) {
       const answer = inputRef.current.value;
       if (!answer) return;
