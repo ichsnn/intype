@@ -139,12 +139,12 @@ const StudentComposeGrammar = withAuth(() => {
   const handleSaveResult = async () => {
     try {
       const token = localStorage.getItem('access_token') as string;
-      const response = await apiPost('/student/tests/composegrammar', {
+      await apiPost('/student/tests/composegrammar', {
         token,
         data: {
           duration: totalDuration,
           score: score,
-          question: questions,
+          question: JSON.stringify(questions),
         },
       });
     } catch (error) {
