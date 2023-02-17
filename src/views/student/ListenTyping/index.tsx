@@ -283,6 +283,9 @@ const StudentListenTyping = withAuth(() => {
                 className="text-4xl border-b border-slate-500 focus:outline-none"
                 height={160}
                 autoFocus
+                onChange={(e) => {
+                  e.target.value = e.target.value.toLowerCase();
+                }}
                 ref={inputRef}
               />
             </form>
