@@ -61,7 +61,8 @@ const StudentListenTyping = withAuth(() => {
   };
 
   const handlePlayAudio = (text?: string) => {
-    speech.text = text || currentQuestion;
+    speech.text = text || currentQuestion;    
+    speech.lang = 'en-US';
     speechSynthesis.speak(speech);
   };
 
