@@ -81,4 +81,6 @@ export const router = createBrowserRouter([
     ],
   },
   { path: 'admin/logout', element: <AdminLogout /> },
+  // Error
+  { path: '*', element: <Error404 /> },
 ]);
