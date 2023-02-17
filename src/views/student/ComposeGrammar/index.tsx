@@ -14,6 +14,8 @@ import { toast } from 'react-toastify';
 import { withAuth } from '@/hoc/auth';
 import { getLocalStorage } from '@/utils/getLocalStorage';
 
+import _ from 'lodash';
+
 interface WordBoxProps {
   word: string;
   isWrited: boolean;
@@ -66,7 +68,7 @@ const StudentComposeGrammar = withAuth(() => {
     await handleGetSentence();
   };
 
-  const handleGetSentence = async () => {
+  const handleGetSentence = _.debounce(async () => {
     try {
       const result = await apiGet('/student/tests/composegrammar/sentences', {
         token: getLocalStorage('access_token'),
@@ -77,14 +79,12 @@ const StudentComposeGrammar = withAuth(() => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, 1000);
 
   const handleCheckAnswer = () => {
     if (checkIsAllWrited()) {
       if (inputRef.current && !isTimeOver) {
         const value = inputRef.current.value;
-        console.log(currentQuestion);
-        console.log(value);
         if (!value) return;
         if (value === currentQuestion) {
           setScore((prev) => prev + answeredScore);
@@ -98,16 +98,17 @@ const StudentComposeGrammar = withAuth(() => {
   };
 
   const handleNextQuestion = async (isAnswered?: boolean) => {
-    setQuestions((prev) => {
-      return [
-        ...prev,
-        {
-          sentence: currentQuestion,
-          isAnswered: isAnswered || false,
-        },
-      ];
-    });
-    await handleGetSentence();
+    const newSentences = sentences.slice(1);
+    setSentences(newSentences);
+    setQuestions((prev) => [
+      ...prev,
+      {
+        sentence: currentQuestion,
+        isAnswered: isAnswered || false,
+      },
+    ]);
+    handleSetQuestion(newSentences);
+    handleGetSentence();
   };
 
   const separateWord = (sentence: string) => {
@@ -138,13 +139,13 @@ const StudentComposeGrammar = withAuth(() => {
 
   const handleSaveResult = async () => {
     try {
-      const token = localStorage.getItem('access_token') as string;
+      console.log(questions);
       await apiPost('/student/tests/composegrammar', {
-        token,
+        token: getLocalStorage('access_token'),
         data: {
           duration: totalDuration,
-          score: score,
-          question: JSON.stringify(questions),
+          score,
+          questions: JSON.stringify(questions),
         },
       });
     } catch (error) {
@@ -153,9 +154,31 @@ const StudentComposeGrammar = withAuth(() => {
     }
   };
 
+  const handleSetQuestion = (sentences: string[]) => {
+    if (sentences.length > 0) {
+      const sentence = sentences[0];
+      const shuffledWords = separateWord(sentence);
+      const newWords = shuffledWords.map((word) => {
+        return {
+          word,
+          isWrited: false,
+        };
+      });
+      setRandomWords(newWords);
+      console.log(sentence);
+      setCurrentQuestion(sentence);
+    }
+  };
+
   useEffect(() => {
     handleGetSentence();
   }, []);
+
+  useEffect(() => {
+    if (isPlaying && sentences.length > 0) {
+      handleSetQuestion(sentences);
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     if (!loading) {
@@ -193,7 +216,12 @@ const StudentComposeGrammar = withAuth(() => {
 
   useEffect(() => {
     if (questions.length > 0 && isTimeOver) {
-      handleSaveResult();
+      const isHaveAnsweredTrue = questions.some(
+        (value) => value.isAnswered === true
+      );
+      if (isHaveAnsweredTrue) {
+        handleSaveResult();
+      }
     }
   }, [isTimeOver]);
 
@@ -241,7 +269,7 @@ const StudentComposeGrammar = withAuth(() => {
           <div className="max-w-7xl mx-auto">
             <ReactModal
               isOpen={isTimeOver}
-              ariaHideApp={true}
+              ariaHideApp={false}
               className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-sky-50 border-sky-200 border-2 p-10 rounded-2xl shadow-lg"
             >
               <div className="flex flex-col items-center justify-center h-full">

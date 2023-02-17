@@ -3,5 +3,5 @@ export const getLocalStorage = (key: string) => {
   if (item) {
     return item as string;
   }
-  return null;
-}
+  return undefined;
+};
