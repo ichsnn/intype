@@ -48,6 +48,7 @@ export default function FormLogin() {
       <div className="flex flex-col gap-5 pb-5 border-b border-slate-900">
         <FormInputWrapper>
           <FormInput
+            type={'text'}
             label="Username / Email"
             id="identifier"
             disabled={loading}
@@ -58,6 +59,7 @@ export default function FormLogin() {
         </FormInputWrapper>
         <FormInputWrapper>
           <FormInput
+            type={'password'}
             label="Password"
             id="password"
             disabled={loading}
