@@ -3,7 +3,6 @@ import { Form, FormInput, FormInputWrapper } from '@/components/Form';
 import { FieldValues, useForm } from 'react-hook-form';
 import ForgotPassword from './ForgotPassword';
 import { useAuth } from '@/contexts/auth';
-import { UserData } from '@/tests';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { apiGet, apiPost } from '@/service/api';
