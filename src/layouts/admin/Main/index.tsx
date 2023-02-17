@@ -16,7 +16,7 @@ const AdminMainLayout = withAuth(() => {
         <div className="px-2 py-4">
           <div className={'p-5 md:p-0'}>
             <h1 className="font-bold text-4xl">
-              <Link to={'/'}>intype.</Link>
+              <Link to={'/'}>intype<span className='text-sky-500'>.</span></Link>
             </h1>
           </div>
         </div>

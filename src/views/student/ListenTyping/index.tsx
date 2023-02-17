@@ -16,7 +16,7 @@ import { withAuth } from '@/hoc/auth';
 
 const loadingDefault = true;
 const timeToStartDefault = 3;
-const totalDurationDefault = 30;
+const totalDurationDefault = 60;
 const durationDefault = totalDurationDefault;
 const isPlayingDefault = false;
 const scoreDefault = 0;
@@ -36,7 +36,8 @@ const StudentListenTyping = withAuth(() => {
   const [isPlaying, setPlaying] = useState(isPlayingDefault);
   const [score, setScore] = useState(scoreDefault);
   const [words, setWords] = useState<Word[]>(wordsDefault);
-  const [questions, setQuestions] = useState<typingQuestions[]>(questionsDefault);
+  const [questions, setQuestions] =
+    useState<typingQuestions[]>(questionsDefault);
   const [currentQuestion, setCurrentQuestion] = useState(
     currentQuestionDefault
   );
@@ -65,6 +66,7 @@ const StudentListenTyping = withAuth(() => {
   };
 
   const handleSubmitAnswer = () => {
+    console.log('p');
     if (inputRef.current && isTimeOver === false) {
       const answer = inputRef.current.value;
       if (!answer) return;
@@ -117,9 +119,9 @@ const StudentListenTyping = withAuth(() => {
       const response = await apiPost('/student/tests/listentyping', {
         token,
         data: {
+          score,
           duration: totalDuration,
-          score: score,
-          question: questions,
+          questions: JSON.stringify(questions),
         },
       });
     } catch (error) {
@@ -211,7 +213,7 @@ const StudentListenTyping = withAuth(() => {
         <div className="py-10">
           <ReactModal
             isOpen={isTimeOver}
-            ariaHideApp={true}
+            ariaHideApp={false}
             className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-sky-50 border-sky-200 border-2 p-10 rounded-2xl shadow-lg"
           >
             <div className="flex flex-col items-center justify-center h-full">

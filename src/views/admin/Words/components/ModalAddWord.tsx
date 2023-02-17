@@ -45,8 +45,11 @@ export default function ModalAddWord({
       wordState.setWords([...wordState.words, response.data]);
       setIsOpen(false);
     } catch (error) {
-      const response = error as any;
-      toast(response.message, { type: 'error' });
+      const errorResponse = error as any;
+      let message = errorResponse.response.data.message;
+      if (message.includes('entry'))
+        message = 'Kata sudah ada, silahkan masukkan kata lain';
+      toast(message, { type: 'error' });
     }
   };
 
@@ -78,7 +81,13 @@ export default function ModalAddWord({
             <FormInput
               label="Kata Baru"
               id="word"
-              {...register('word', { required: true })}
+              {...register('word', {
+                required: true,
+                pattern: /^[a-z]+$/,
+                onChange: (e) => {
+                  e.target.value = e.target.value.toLowerCase();
+                },
+              })}
             />
           </div>
           <div className="flex flex-col gap-2">
