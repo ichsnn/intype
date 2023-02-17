@@ -6,7 +6,6 @@ import { useAuth } from '@/contexts/auth';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { apiGet, apiPost } from '@/service/api';
-import { useNavigate } from 'react-router-dom';
 
 export default function FormLogin() {
   const {
@@ -16,7 +15,6 @@ export default function FormLogin() {
   } = useForm();
 
   const { login } = useAuth();
-  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
 
