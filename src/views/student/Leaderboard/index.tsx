@@ -6,7 +6,7 @@ import Table from './components/Table';
 import { columns } from './helpers';
 
 const StudentLeaderboard = () => {
-  const [type, setType] = useState('composgramamr');
+  const [type, setType] = useState('composegramamr');
   const [leaderboards, setLeaderboards] = useState<any>({
     composegrammar: [],
     listentyping: [],
