@@ -1,7 +1,7 @@
-import { useDebugState } from '@/hooks/useDebugState';
 import { apiGet } from '@/service/api';
 import { getLocalStorage } from '@/utils/getLocalStorage';
 import { ChangeEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Table from './components/Table';
 import { columns } from './helpers';
 
@@ -26,15 +26,15 @@ const StudentLeaderboard = () => {
       setLeaderboards(response.data);
     } catch (error) {
       const { response } = error as any;
-      console.log(response.data.message);
+      toast(response.data.message, {
+        type: 'error',
+      });
     }
   };
 
   useEffect(() => {
     fetchLeaderboard();
   }, []);
-
-  useDebugState(leaderboards, 'leaderboards');
 
   return (
     <div className="max-w-4xl mx-auto">
