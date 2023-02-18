@@ -98,6 +98,7 @@ export default function Table({
           <ChevronDoubleLeftIcon className="w-5 h-5" />
         </button>
         <button
+          type="button"
           className="border rounded p-1 disabled:opacity-30"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -105,6 +106,7 @@ export default function Table({
           <ChevronLeftIcon className="w-5 h-5" />
         </button>
         <button
+          type="button"
           className="border rounded p-1 disabled:opacity-30"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
@@ -112,6 +114,7 @@ export default function Table({
           <ChevronRightIcon className="w-5 h-5" />
         </button>
         <button
+          type="button"
           className="border rounded p-1 disabled:opacity-30"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
